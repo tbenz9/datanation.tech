@@ -96,3 +96,15 @@ Sample response:
 ```
 No JSON response, but a 200 status should be returned
 ```
+
+## To mark a Skynet link as dead (POST request)
+```
+#> curl -X POST -H "Content-Type: application/json" -d @deadexample.json http://localhost:8081/files/dead
+```
+Sample data in `deadexample.json`
+```
+{
+    "fileLink": "XADyBtepOn4N9_cILGYD5issx269K-uRdFBye6FRVia2XQ",
+    "fileDead": 0
+}
+```

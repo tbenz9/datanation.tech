@@ -15,8 +15,6 @@ if (flags.get('debug')) {
 	var debug = true;
 }
 
-if (debug) { console.log('debug shorthand') }
-
 function connectDB() {
     let db = new sqlite3.Database('./dn.db', (err) => {
         if (err) {
@@ -68,7 +66,23 @@ app.get('/files/delete', function(req, res) {
         if (debug) {console.log(`A row has been deleted with rowid ${this.lastID}`);}
         res.sendStatus(200)
     });
+    closeDB(db);
+})
 
+// files DEAD
+app.post('/files/dead', function(req, res) {
+    if (debug) {console.log(req.body);}
+
+	let db = connectDB();
+
+    db.run(`UPDATE FILES SET fileDead=? WHERE fileLink=?`, [req.body.fileDead, req.body.fileLink], function(err) {
+        if (err) {
+            return console.log(err.message);
+        }
+        // get the last insert id
+        if (debug) {console.log(`A row has been updated with rowid ${this.lastID}`);}
+        res.sendStatus(200)
+    });
     closeDB(db);
 })
 
@@ -88,7 +102,6 @@ app.get('/files', function(req, res) {
 
         console.log('Requesting a single file')
     } else {
-
         db.serialize(() => {
             db.all(`SELECT fileLink,fileName,fileType,fileDescription FROM FILES`, (err, rows) => {
                 if (err) {
@@ -98,7 +111,6 @@ app.get('/files', function(req, res) {
                 res.send(rows);
             });
         });
-
     }
     closeDB(db);
     })
