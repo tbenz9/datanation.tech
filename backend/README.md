@@ -5,16 +5,12 @@
 
 ## Install node dependencies
 ```
-#> npm install express sqlite3 body-parser flags
+#> npm i
 ```
 
 ## Set up the sqlite3 database
 ```
-#> sqlite3 dn.db
-sqlite> create table FILES ( fileLink TEXT PRIMARY KEY, fileName TEXT, fileType TEXT, fileCategory TEXT, fileUploadedTimestamp INT, fileUploadedUser INT, file
-Description TEXT, fileRating INT, fileSize INT );
-sqlite> create table COMMENTS ( commentID INTEGER PRIMARY KEY AUTOINCREMENT, fileLink TEXT, commentTimestamp INTEGER, commentUser INTEGER, commentBody TEXT, c
-ommentRating INTEGER );
+#> npm run initdb
 ```
 
 ## To run the server
