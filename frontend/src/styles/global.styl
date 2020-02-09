@@ -1,0 +1,138 @@
+@require "vars";
+@require "typeography";
+
+* {
+	box-sizing: border-box;
+}
+
+html, body {
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+	font-size: 14px;
+	font-weight: 300;
+	color: rgba(0, 0, 0, 0.84);
+	background-color: bg;
+	font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+	-webkit-font-smoothing: antialiased;
+	overflow: hidden;
+}
+
+a {
+	display: inline-block;
+	color: primary;
+	text-decoration: none;
+
+	&:hover, &:active, &:focus {
+		text-decoration: underline;	
+	}
+}
+
+.page {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	width: 100%;
+	height: 100%;
+	padding: 60px 15px 15px;
+	margin: auto;
+	max-width: 1200px;
+	overflow-x: hidden;
+	overflow-y: auto;
+
+	@media screen and (min-width: 767px) {
+		padding: 15px;	
+	}
+}
+
+.panel {
+	position: relative;
+	display: block;
+	width: 100%;
+	padding: 30px;
+	background: #fff;
+	box-shadow: global-shadow;
+	border-radius: 4px;
+}
+
+.btn {
+	display: block;
+	width: 100%;
+	outline: none;
+	background: light-gray;
+	padding: 8px 13px;
+	white-space: nowrap;
+	border: none;
+	font-size: 1rem;
+	border-radius: 4px;
+	box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.15);
+	transition: all 0.3s linear;
+	text-decoration: none;
+	-webkit-user-select: none;
+
+	&:focus, &:active, &:hover {
+		cursor: pointer;
+		box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.24);
+	}
+
+	> svg {
+		margin-right: 10px;
+	}
+
+	&.btn-inline {
+		display: inline-block;
+		width: auto;
+		margin-right: 15px;
+	}
+
+	&.btn-primary {
+		background: primary;
+		color: rgba(255, 255, 255, 0.84);
+	}
+
+	&.btn-success {
+		background: success-accent;
+		color: rgba(255, 255, 255, 0.84);
+	}
+
+	&.btn-warning {
+		background: warning-accent;
+		color: rgba(255, 255, 255, 0.84);	
+	}
+
+	&.btn-danger {
+		background: negative-accent;
+		color: rgba(255, 255, 255, 0.84);
+	}
+
+	&:disabled {
+		opacity: 0.54;
+		cursor: default;
+	}
+}
+
+.buttons {
+	text-align: center;
+
+	> button:last-child, > a:last-child {
+		margin-right: 0;
+	}	
+}
+
+.fade-enter-active {
+	transition: transform .5s ease, opacity .5s ease;
+}
+
+.fade-leave-active {
+	transition: transform .5s ease, opacity .5s ease;
+}
+
+.fade-enter, .fade-leave-to {
+	transform: translateY(30px);
+	opacity: 0;
+}
+
+@require "controls";
