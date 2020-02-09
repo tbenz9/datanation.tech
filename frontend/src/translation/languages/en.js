@@ -6,7 +6,7 @@
 export default {
 	key: 'en',
 	translations: {
-		
+
 		language: {
 			automatic: 'Automatic',
 			en: 'English'

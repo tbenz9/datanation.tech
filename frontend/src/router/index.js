@@ -7,8 +7,13 @@ Vue.use(VueRouter);
 const routes = [
 	{
 		path: '/',
-		name: 'Browse',
+		name: 'browse',
 		component: Browse
+	},
+	{
+		path: '/add-skylink',
+		name: 'addSkylink',
+		component: () => import('@/views/AddSkylink.vue')
 	}
 ];
 
