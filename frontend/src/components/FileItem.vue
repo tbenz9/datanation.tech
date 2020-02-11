@@ -1,27 +1,49 @@
 <template>
-	<div class="panel file-panel">
+	<router-link :to="{ name: 'fileDetail', params: { skylink: id }}" class="panel file-panel">
 		<div class="file-icon"><icon :icon="typeIcon" /></div>
 		<div class="file-name">{{ name }}</div>
-		<div class="file-link">
-			<a :href="downloadLink" :download="name" target="_blank"><icon icon="download" /></a>
-		</div>
-		<div class="file-description">
-			{{ file.fileDescription }}
-		</div>
-	</div>
+		<div class="file-size" v-html="fileSize" />
+		<div class="file-upload">{{ dateStr }}</div>
+	</router-link>
 </template>
 
 <script>
+import { formatByteString } from '@/format';
+
 export default {
 	props: {
 		file: Object
 	},
 	computed: {
+		id() {
+			if (!this.file || typeof this.file.fileLink !== 'string')
+				return '#';
+
+			if (this.file.fileLink.indexOf('sia://') === 0)
+				return this.file.fileLink.substring(6);
+
+			return this.file.fileLink;
+		},
 		name() {
 			if (!this.file || typeof this.file.fileName !== 'string')
 				return 'unknown';
 
 			return this.file.fileName;
+		},
+		fileSize() {
+			const format = formatByteString(0, 2);
+
+			return `${format.value} <span class="label-display">${format.label}</span>`;
+		},
+		uploadDate() {
+			return new Date();
+		},
+		dateStr() {
+			return this.uploadDate.toLocaleString([], {
+				year: 'numeric',
+				month: 'short',
+				day: '2-digit'
+			});
 		},
 		typeIcon() {
 			if (!this.file || typeof this.file.fileType !== 'string')
@@ -41,17 +63,6 @@ export default {
 			default:
 				return 'file';
 			}
-		},
-		downloadLink() {
-			if (!this.file || typeof this.file.fileLink !== 'string')
-				return '#';
-
-			let link = this.file.fileLink;
-
-			if (link.indexOf('sia://') === 0)
-				link = link.substring(6);
-
-			return `https://skynet.siacentral.com/${link}`;
 		}
 	}
 };
@@ -60,15 +71,21 @@ export default {
 <style lang="stylus" scoped>
 .file-panel {
 	display: grid;
-	grid-template-columns: 24px minmax(0, 1fr) auto;
-	grid-template-areas: "a b c" \ "d d d";
+	width: 100%;
+	grid-template-columns: 24px minmax(0, 1fr) repeat(2, auto);
 	grid-gap: 15px;
+	padding: 10px 15px;
 	align-items: center;
 	margin-bottom: 15px;
+	color: rgba(0, 0, 0, 0.84);
+	text-decoration: none;
+
+	&:hover, &:active, &:focus {
+		text-decoration: none;
+	}
 }
 
 .file-icon {
-	grid-area: a;
 	color: primary;
 
 	svg {
@@ -76,15 +93,5 @@ export default {
 		height: 24px;
 		margin: 0;
 	}
-}
-
-.file-link {
-	grid-area: c;
-}
-
-.file-description {
-	grid-area: d;
-	border-top: 1px solid light-gray;
-	padding-top: 15px;
 }
 </style>
