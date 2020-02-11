@@ -1,10 +1,12 @@
-const body_parser = require('body-parser');
-const express = require('express');
-const flags = require('flags');
-const sqlite3 = require('sqlite3').verbose();
-var app = express();
-var fs = require("fs");
+const body_parser = require('body-parser'),
+    express = require('express'),
+    flags = require('flags'),
+    sqlite3 = require('sqlite3').verbose(),
+    fs = require('fs');
 
+var app = express();
+
+app.use(require('cors')());
 app.use(body_parser.json());
 
 flags.defineBoolean('debug');
