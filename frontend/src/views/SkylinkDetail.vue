@@ -160,16 +160,27 @@ export default {
 
 .portal-providers {
 	margin-bottom: 15px;
+
+	> a {
+		display: block;
+		margin: 0 5px 5px 0;
+
+		@media screen and (min-width: 767px) {
+			display: inline-block;
+		}
+	}
 }
 
 .file-meta {
 	color: rgba(0, 0, 0, 0.54);
-}
 
-.portal-providers, .file-meta {
-	a, span {
-		display: inline-block;
+	> span {
+		display: block;
 		margin: 0 5px 5px 0;
+
+		@media screen and (min-width: 767px) {
+			display: inline-block;
+		}
 	}
 }
 
