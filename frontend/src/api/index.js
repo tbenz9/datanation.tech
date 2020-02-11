@@ -46,6 +46,9 @@ export async function getFiles() {
 }
 
 export async function getFile(link) {
+	if (link.indexOf('sia://') === -1)
+		link = `sia://${link}`;
+
 	const file = await sendJSONRequest(`${apiBaseURL}/files?fileLink=${encodeURIComponent(link)}`);
 
 	return file.body;
