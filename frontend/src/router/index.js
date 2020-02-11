@@ -8,11 +8,19 @@ const routes = [
 	{
 		path: '/',
 		name: 'browse',
+		props: true,
 		component: Browse
+	},
+	{
+		path: '/:skylink',
+		name: 'fileDetail',
+		props: true,
+		component: () => import('@/views/SkylinkDetail.vue')
 	},
 	{
 		path: '/add-skylink',
 		name: 'addSkylink',
+		props: true,
 		component: () => import('@/views/AddSkylink.vue')
 	}
 ];

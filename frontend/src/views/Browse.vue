@@ -31,38 +31,12 @@ export default {
 	methods: {
 		async loadFiles() {
 			this.files = await getFiles();
-
-			console.log(this.files);
 		}
 	}
 };
 </script>
 
 <style lang="stylus" scoped>
-table {
-	width: 100%;
-
-	td {
-		padding: 15px;
-		margin-bottom: 15px;
-
-		&.fit-text {
-			width: 1px;
-			white-space: nowrap;
-		}
-
-		&:first-child {
-			border-top-left-radius: 4px;
-			border-bottom-left-radius: 4px;
-		}
-
-		&:last-child {
-			border-top-left-radius: 4px;
-			border-bottom-left-radius: 4px;
-		}
-	}
-}
-
 .btn.btn-add {
 	position: absolute;
 	display: inline-block;
