@@ -1,3 +1,5 @@
+const apiBaseURL = process.env.VUE_APP_API_BASE_URL || 'http://localhost:8081';
+
 async function sendJSONRequest(url, opts) {
 	opts = {
 		method: 'GET',
@@ -35,7 +37,7 @@ async function sendJSONRequest(url, opts) {
 }
 
 export async function getFiles() {
-	const files = await sendJSONRequest('http://localhost:8081/files');
+	const files = await sendJSONRequest(`${apiBaseURL}/files`);
 
 	if (!Array.isArray(files.body))
 		return [];
@@ -44,13 +46,13 @@ export async function getFiles() {
 }
 
 export async function getFile(link) {
-	const file = await sendJSONRequest(`http://localhost:8081/files?fileLink=${encodeURIComponent(link)}`);
+	const file = await sendJSONRequest(`${apiBaseURL}/files?fileLink=${encodeURIComponent(link)}`);
 
 	return file.body;
 }
 
 export async function addFile(file) {
-	await sendJSONRequest('http://localhost:8081/files', {
+	await sendJSONRequest(`${apiBaseURL}/files`, {
 		method: 'POST',
 		body: {
 			fileLink: file.fileLink || '',
